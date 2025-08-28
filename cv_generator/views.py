@@ -4,4 +4,5 @@ from django.shortcuts import render
 
 
 def index(request):
+    print(request, "REQ")
     return render(request=request, template_name='cv_generator/accept.html', context={})
