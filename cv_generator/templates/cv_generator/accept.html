@@ -1,56 +1,57 @@
 {% extends 'cv_generator/base.html' %}
 
 {% block content %}
-   <div class='container'>
-    <div class="row">
-        <div class="'col">
-             <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="phone-number" name="phone-number" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">About You</label>
-            <textarea class="form-control" id="summary" name="summary" rows="4"></textarea>
-        </div>
-         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Degree</label>
-            <input type="text" class="form-control" id="degree" name="degree">
-        </div>
-         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">School</label>
-            <input type="text" class="form-control" id="school" name="school">
-        </div>
-         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">University</label>
-            <input type="text" class="form-control" id="university" name="university">
-        </div>
-         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Previous Work</label>
-            <textarea  class="form-control" id="previous_work" name="previous_work" rows="4"></textarea>
-        </div>
-         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Skills</label>
-            <textarea class="form-control" id="skills" name="skills" rows="4"></textarea>
-        </div>
-       
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-        </div>
+    <div class='container'></div>
+     <div class="row">
+          <div class="'col">
+                <form method="POST" action="{% url 'cv_generator:index' %}">
+                     {% csrf_token %}
+                     <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Name</label>
+                          <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                          </div>
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                          </div>
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                          <input type="text" class="form-control" id="phone-number" name="phone-number" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+                          </div>
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">About You</label>
+                          <textarea class="form-control" id="summary" name="summary" rows="4"></textarea>
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Degree</label>
+                          <input type="text" class="form-control" id="degree" name="degree">
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">School</label>
+                          <input type="text" class="form-control" id="school" name="school">
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">University</label>
+                          <input type="text" class="form-control" id="university" name="university">
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Previous Work</label>
+                          <textarea  class="form-control" id="previous_work" name="previous_work" rows="4"></textarea>
+                     </div>
+                     <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Skills</label>
+                          <textarea class="form-control" id="skills" name="skills" rows="4"></textarea>
+                     </div>
+                
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+          </div>
+     </div>
     </div>
-   </div>
 {% endblock %}
