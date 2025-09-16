@@ -1,12 +1,17 @@
 from django.shortcuts import render
 from .models import ResumeDetailsModel
 import logging
+from django.http import Http404
+from django.views.decorators.http import require_http_methods
+from django.http import (
+    HttpResponse, HttpResponseBadRequest, JsonResponse
+)
 
 logger = logging.getLogger(__name__)
 
 # Create your views here.
 
-
+@require_http_methods(["GET", "POST"])
 def index(request):
     print(request, "REQ")
     if request.method == "POST":
@@ -43,3 +48,17 @@ def index(request):
 
         print(request.POST, "POST")
     return render(request=request, template_name='cv_generator/accept.html', context={})
+
+
+
+def generate_cv(request, id):
+    try:
+        current_resume = ResumeDetailsModel.objects.filter(id=id).first()
+        if not current_resume:
+            raise Http404("Resume not found")
+        context = {"resume": current_resume}
+        return render(request=request, template_name='cv_generator/resume_template.html', context=context)
+    except Exception as e:
+        logger.error(f"Error occurred while fetching resume data: {e}")
+        raise HttpResponseBadRequest("Bad Request")
+    
