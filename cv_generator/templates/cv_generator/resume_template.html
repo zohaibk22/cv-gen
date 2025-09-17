@@ -6,20 +6,29 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>{{resume.name}}</h2>
-    <h2>{{resume.email}}</h2>
-    <h2>{{resume.phone_number}}</h2>
-    <hr>
-    <br>
-    <p>Summary</p>
-    <p>{{resume.summary}}</p>
-    <p>Skills</p>
-    <p>{{resume.skills}}</p>
-    <p>Education</p>
-    <ul>
-        <li>{{resume.school}}</li>
-        <li>{{resume.university}}</li>
-    </ul>
+    <div style="max-width: 700px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); font-family: Arial, sans-serif;">
+        <h1 style="margin-bottom: 5px; font-size: 2em; color: #333;">{{resume.name}}</h1>
+        <div style="margin-bottom: 15px; color: #555;">
+            <span style="margin-right: 20px;"><strong>Email:</strong> {{resume.email}}</span>
+            <span><strong>Phone:</strong> {{resume.phone_number}}</span>
+        </div>
+        <hr style="margin: 20px 0;">
+        <section style="margin-bottom: 20px;">
+            <h2 style="font-size: 1.2em; color: #2a7ae2; margin-bottom: 8px;">Summary</h2>
+            <p style="color: #444;">{{resume.summary}}</p>
+        </section>
+        <section style="margin-bottom: 20px;">
+            <h2 style="font-size: 1.2em; color: #2a7ae2; margin-bottom: 8px;">Skills</h2>
+            <p style="color: #444;">{{resume.skills}}</p>
+        </section>
+        <section>
+            <h2 style="font-size: 1.2em; color: #2a7ae2; margin-bottom: 8px;">Education</h2>
+            <ul style="color: #444; padding-left: 20px;">
+                <li>{{resume.school}}</li>
+                <li>{{resume.university}}</li>
+            </ul>
+        </section>
+    </div>
 
 
     
