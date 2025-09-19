@@ -6,6 +6,9 @@ from django.views.decorators.http import require_http_methods
 from django.http import (
     HttpResponse, HttpResponseBadRequest, JsonResponse
 )
+import pdfkit
+from django.template import loader
+import io
 
 logger = logging.getLogger(__name__)
 
@@ -51,14 +54,30 @@ def index(request):
 
 
 
+@require_http_methods(["GET", "POST"])
 def generate_cv(request, id):
     try:
         current_resume = ResumeDetailsModel.objects.filter(id=id).first()
+        
+
         if not current_resume:
             raise Http404("Resume not found")
+        
+
         context = {"resume": current_resume}
-        return render(request=request, template_name='cv_generator/resume_template.html', context=context)
+
+        template = loader.get_template('cv_generator/resume_template.html')
+        html = template.render(context)
+        # this takes an html string and convert it to a pdf document
+        options ={'page-size': 'Letter',
+           'encoding': "UTF-8",}
+        pdf = pdfkit.from_string(html, False,options=options)
+       
+       
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{current_resume.name}_resume.pdf'
+        return response
     except Exception as e:
         logger.error(f"Error occurred while fetching resume data: {e}")
-        raise HttpResponseBadRequest("Bad Request")
+        return HttpResponseBadRequest("Bad Request")
     
