@@ -47,9 +47,6 @@ def index(request):
         except Exception as e:
             logger.error(f"Error occurred while creating resume data: {e}")
 
-
-
-        print(request.POST, "POST")
     return render(request=request, template_name='cv_generator/accept.html', context={})
 
 
