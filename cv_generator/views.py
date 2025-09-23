@@ -9,6 +9,8 @@ from django.http import (
 import pdfkit
 from django.template import loader
 import io
+from weasyprint import HTML
+
 
 logger = logging.getLogger(__name__)
 
