@@ -6,7 +6,6 @@ from django.views.decorators.http import require_http_methods
 from django.http import (
     HttpResponse, HttpResponseBadRequest, JsonResponse
 )
-import pdfkit
 from django.template import loader
 import io
 from weasyprint import HTML
@@ -67,14 +66,11 @@ def generate_cv(request, id):
 
         template = loader.get_template('cv_generator/resume_template.html')
         html = template.render(context)
-        # this takes an html string and convert it to a pdf document
-        options ={'page-size': 'Letter',
-           'encoding': "UTF-8",}
-        pdf = pdfkit.from_string(html, False,options=options)
+        # this takes an html string and convert it to a pdf document using WeasyPrint
+        pdf_file = HTML(string=html).write_pdf()
        
-       
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="{current_resume.name}_resume.pdf'
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{current_resume.name}_resume.pdf"'
         return response
     except Exception as e:
         logger.error(f"Error occurred while fetching resume data: {e}")
