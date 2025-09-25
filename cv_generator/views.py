@@ -76,3 +76,16 @@ def generate_cv(request, id):
         logger.error(f"Error occurred while fetching resume data: {e}")
         return HttpResponseBadRequest("Bad Request")
     
+@require_http_methods(["GET"])
+def profiles(request):
+    try:
+        profiles = ResumeDetailsModel.objects.all()
+        context = {"resumes": profiles}
+        return render(request=request,template_name='cv_generator/all_profiles.html', context=context)
+    except ResumeDetailsModel.DoesNotExist:
+        logger.error("No profiles found in the database.")
+        return HttpResponseBadRequest("No profiles found.")
+    except Exception as e:
+        logger.exception("Unexpected error occurred while fetching all profiles.")
+        return HttpResponseBadRequest(f"An unexpected error occurred: {str(e)}")
+        
