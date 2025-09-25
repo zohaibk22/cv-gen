@@ -5,5 +5,6 @@ app_name='cv_generator'
 
 urlpatterns = [
     path('', view=views.index, name="index"),
-    path('<int:id>/', view=views.generate_cv, name="generate_cv")
+    path('<int:id>/', view=views.generate_cv, name="generate_cv"),
+    path('profiles/', view=views.profiles, name="all_profiles")
 ]   
